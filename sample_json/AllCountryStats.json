@@ -1,0 +1,25 @@
+https://api.thevirustracker.com/free-api?countryTotals=ALL
+{
+    "sitedata": [{
+        "info": {
+            "source": "https://thevirustracker.com/"
+        }
+    }],
+    "countryitems": [{
+        "1": {
+            "ourid": 1,
+            "title": "Afghanistan",
+            "code": "AF",
+            "source": "https://thevirustracker.com/afghanistan-coronavirus-information-af",
+            "total_cases": 94,
+            "total_recovered": 2,
+            "total_unresolved": 0,
+            "total_deaths": 4,
+            "total_new_cases_today": 0,
+            "total_new_deaths_today": 0,
+            "total_active_cases": 88,
+            "total_serious_cases": 0
+        },
+        "stat": "ok"
+    }]
+}
