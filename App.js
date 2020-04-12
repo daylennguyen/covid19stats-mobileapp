@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import {Root, StyleSheet, Text, View, Picker } from 'react-native';
+import { Root, StyleSheet, Text, View, Picker, FlatList } from 'react-native';
 import { Header } from 'react-native-elements';
 import { useState } from 'react';
 import CardList from './components/CardList';
+import { ListItem } from 'react-native-elements';
 
 // import React, { useState } from "react";
 
@@ -10,7 +11,8 @@ import CardList from './components/CardList';
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		paddingTop: 40,
+		height: "100%",
+		// paddingTop: 40,
 		width: '100%',
 		backgroundColor: "black",
 		alignItems: "center"
@@ -46,7 +48,6 @@ export default class App extends Component
 				if (responseJson.Countries)
 				{
 					this.setState({ countries: responseJson.Countries });
-					// console.log()
 				}
 
 			})
@@ -63,7 +64,6 @@ export default class App extends Component
 			// <CardList />
 			<View style={ styles.container }>
 				<Header
-				style={{position:'absolute', top:0, width:'100vw'}}
 					leftComponent={ { icon: 'menu', color: '#fff' } }
 					centerComponent={ { text: 'MY TITLE', style: { color: '#fff' } } }
 					rightComponent={ { icon: 'home', color: '#fff' } }
@@ -79,7 +79,51 @@ export default class App extends Component
 				>
 					{ this.state.countries === [] ? <Picker.Item key={ 420 } label="Loading" value="Loading" /> : this.state.countries.map((country) => { return <Picker.Item key={ country.CountryCode } label={ `(${country.CountryCode}) ${country.Country}` } value={ country.CountryCode } />; }) }
 				</Picker>
-				<Text style={ { display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' } }>
+				{/* <View> */ }
+
+				<View
+					style={ { backgroundColor: "blue", flex: 3, width: '95%' } }
+				>
+
+					<ListItem
+
+						key={ 444412 }
+						title={ 'blahhhhhhhhhhhhhhhhhh' }
+						badge={ { value: 3222, textStyle: { color: 'white' } } }
+						bottomDivider
+						chevron />
+					<ListItem
+						key={ 123123 }
+						title={ 'blahhhhhhhhhhhhhhhhhh' }
+						badge={ { value: 3222, textStyle: { color: 'white' } } }
+						bottomDivider
+						chevron />
+					<ListItem
+						key={ 1234123 }
+						title={ 'blahhhhhhhhhhhhhhhhhh' }
+						badge={ { value: 3222, textStyle: { color: 'white' } } }
+						bottomDivider
+						chevron />
+					<ListItem
+						key={ 12351234 }
+						title={ 'blahhhhhhhhhhhhhhhhhh' }
+						badge={ { value: 3222, textStyle: { color: 'white' } } }
+						bottomDivider
+						chevron />
+					<ListItem
+						key={ 12361233 }
+						title={ 'blahhhhhhhhhhhhhhhhhh' }
+						badge={ { value: 3222, textStyle: { color: 'white' } } }
+						bottomDivider
+						chevron />
+
+				</View>
+
+
+				{/* </View> */ }
+
+
+				{/* <Text style={ { display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' } }>
 					<Text style={ StatStyle }>{ "\n" }New Confirmed Cases: { "\n" }{ this.state.global.NewConfirmed } (Globally)</Text>
 					<Text style={ StatStyle }>
 						{ "\n" }Total Confirmed: { "\n" }{ this.state.global.TotalConfirmed } (Globally)
@@ -90,7 +134,7 @@ export default class App extends Component
 					<Text style={ StatStyle }>
 						{ "\n" }Total Recovered: { "\n" }{ this.state.global.TotalRecovered } (Globally)
 					</Text>
-				</Text>
+				</Text> */}
 			</View>
 			// </View>
 		);
