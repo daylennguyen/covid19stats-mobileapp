@@ -55,8 +55,8 @@ export default class App extends Component
 
 		// console.log(props, "123")
 	}
-
-	render(props)
+ 
+	render(props) 
 	{
 		console.log(this.state);
 		return (
@@ -70,7 +70,7 @@ export default class App extends Component
 				/>
 				<Picker
 					selectedValue={ this.state.selectedValue }
-					style={ { height: 50, width: "90%", backgroundColor: 'white', color: 'black' } }
+					style={ { height: 50, width: "90%", backgroundColor: 'white', color: 'blue' } }
 					onValueChange={ (itemValue, itemIndex) =>
 					{
 						this.setState({ selectedValue: itemValue });
@@ -98,7 +98,7 @@ export default class App extends Component
 						badge={ { value: 3222, textStyle: { color: 'white' } } }
 						bottomDivider
 						chevron />
-					<ListItem
+					{/* <ListItem
 						key={ 1234123 }
 						title={ 'blahhhhhhhhhhhhhhhhhh' }
 						badge={ { value: 3222, textStyle: { color: 'white' } } }
@@ -115,7 +115,7 @@ export default class App extends Component
 						title={ 'blahhhhhhhhhhhhhhhhhh' }
 						badge={ { value: 3222, textStyle: { color: 'white' } } }
 						bottomDivider
-						chevron />
+						chevron /> */}
 
 				</View>
 
