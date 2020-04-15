@@ -5,17 +5,16 @@ import { useState } from 'react';
 import CardList from './components/CardList';
 import { ListItem } from 'react-native-elements';
 
-// import React, { useState } from "react";
 
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		height: "100%",
+		height: '100%',
 		// paddingTop: 40,
 		width: '100%',
-		backgroundColor: "black",
-		alignItems: "center"
+		// backgroundColor: '#c7c7c7',
+		alignItems: 'center'
 	}
 });
 
@@ -26,15 +25,13 @@ export default class App extends Component
 	constructor(props)
 	{
 		super(props);
-		this.state = { countries: [], global: {}, date: "", selectedValue: "" };
+		this.state = { countries: [], global: {}, date: "", selectedValue: {} };
 
 		console.log(props);
 	}
 
 	async componentDidMount(props)
 	{
-		// console.log(props);
-		// getStatFromApiAsync((result)=>{console.log(result)})
 		await fetch('https://api.covid19api.com/summary')
 			.then((response) => response.json())
 			.then((responseJson) =>
@@ -53,75 +50,102 @@ export default class App extends Component
 			})
 			.catch((error) => console.log(error)); //to catch the errors if any
 
-		// console.log(props, "123")
+
 	}
- 
-	render(props) 
+
+	render(props)
 	{
-		console.log(this.state);
 		return (
-			// <View style={styles.container}>
-			// <CardList />
-			<View style={ styles.container }>
+			<View style={styles.container}>
 				<Header
-					leftComponent={ { icon: 'menu', color: '#fff' } }
-					centerComponent={ { text: 'MY TITLE', style: { color: '#fff' } } }
-					rightComponent={ { icon: 'home', color: '#fff' } }
+					leftComponent={{ icon: 'menu', color: '#fff' }}
+					centerComponent={{ text: 'COVID-19 BASIC STATS', style: { color: '#fff' } }}
+					rightComponent={{ icon: 'home', color: '#fff' }}
 				/>
 				<Picker
-					selectedValue={ this.state.selectedValue }
-					style={ { height: 50, width: "90%", backgroundColor: 'white', color: 'blue' } }
-					onValueChange={ (itemValue, itemIndex) =>
-					{
-						this.setState({ selectedValue: itemValue });
-						console.log(itemValue);
-					} }
-				>
-					{ this.state.countries === [] ? <Picker.Item key={ 420 } label="Loading" value="Loading" /> : this.state.countries.map((country) => { return <Picker.Item key={ country.CountryCode } label={ `(${country.CountryCode}) ${country.Country}` } value={ country.CountryCode } />; }) }
+					selectedValue={this.state.selectedValue.CountryCode}
+					style={{
+						marginBottom:10,
+						height: 50,
+						width: '90%',
+						// border: 'solid black 1px'
+						// backgroundColor: 'white',
+						// color: 'blue'
+					}}
+					onValueChange={(itemValue, itemIndex) => {
+						this.setState({
+							selectedValue: this.state.countries[itemIndex]
+						});
+						console.log(this.state.countries[itemIndex]);
+					}}>
+					{this.state.countries === [] ? (
+						<Picker.Item key={420} label='Loading' value='Loading' />
+					) : (
+						this.state.countries.map((country) => {
+							return (
+								<Picker.Item
+									key={country.CountryCode}
+									label={`(${country.CountryCode}) ${country.Country}`}
+									value={country.CountryCode}
+								/>
+							);
+						})
+					)}
 				</Picker>
-				{/* <View> */ }
-
-				<View
-					style={ { backgroundColor: "blue", flex: 3, width: '95%' } }
-				>
-
+				<View style={{ backgroundColor: 'blue', flex: 3, width: '100%' }}>
 					<ListItem
+						key={444412}
+						title={'Country'}
+						badge={{
+							value: this.state.selectedValue.Country,
+							textStyle: { color: 'white' }
+						}}
+						bottomDivider
+					/>
+					<ListItem
+						key={123123}
+						title={'Country Code'}
+						badge={{
+							value: this.state.selectedValue.CountryCode,
+							textStyle: { color: 'white' }
+						}}
+						bottomDivider
+					/>
+					<ListItem
+						key={1234123}
+						title={'New Confirmed Cases'}
+						badge={{
+							value: this.state.selectedValue.NewConfirmed,
+							textStyle: { color: 'white', fontSize: 13 }
+						}}
+						bottomDivider
+					/>
+					<ListItem
+						key={12351234}
+						title={'New Confirmed Deaths'}
+						badge={{
+							value: this.state.selectedValue.NewDeaths,
+							textStyle: { color: 'white', fontSize: 13 },
+							status: 'error'
+						}}
+						bottomDivider
 
-						key={ 444412 }
-						title={ 'blahhhhhhhhhhhhhhhhhh' }
-						badge={ { value: 3222, textStyle: { color: 'white' } } }
-						bottomDivider
-						chevron />
+					/>
 					<ListItem
-						key={ 123123 }
-						title={ 'blahhhhhhhhhhhhhhhhhh' }
-						badge={ { value: 3222, textStyle: { color: 'white' } } }
-						bottomDivider
-						chevron />
-					{/* <ListItem
-						key={ 1234123 }
-						title={ 'blahhhhhhhhhhhhhhhhhh' }
-						badge={ { value: 3222, textStyle: { color: 'white' } } }
-						bottomDivider
-						chevron />
-					<ListItem
-						key={ 12351234 }
-						title={ 'blahhhhhhhhhhhhhhhhhh' }
-						badge={ { value: 3222, textStyle: { color: 'white' } } }
-						bottomDivider
-						chevron />
-					<ListItem
-						key={ 12361233 }
-						title={ 'blahhhhhhhhhhhhhhhhhh' }
-						badge={ { value: 3222, textStyle: { color: 'white' } } }
-						bottomDivider
-						chevron /> */}
+						key={12361233}
+						title={'New Confirmed Recoveries'}
+						badge={{
+							value: this.state.selectedValue.NewRecovered,
+							// badgeStyle: { backgroundColor: 'black' },
+														textStyle: { color: 'white', fontSize:13 }
 
+,							status: 'success'
+						}}
+						bottomDivider
+					/>
 				</View>
 
-
-				{/* </View> */ }
-
+				{/* </View> */}
 
 				{/* <Text style={ { display: 'flex', flexDirection: 'column', justifyContent: 'flex-start' } }>
 					<Text style={ StatStyle }>{ "\n" }New Confirmed Cases: { "\n" }{ this.state.global.NewConfirmed } (Globally)</Text>
